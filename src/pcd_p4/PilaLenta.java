@@ -6,12 +6,14 @@ package pcd_p4;
 
 /**
  *
- * @author leonl
+ * @author Lucía Zamudio
  */
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PilaLenta implements IPila {
+
     private int cima = -1;
     private int capacidad;
     private int numelementos;
@@ -28,34 +30,50 @@ public class PilaLenta implements IPila {
         this.canvas = canvas;
     }
 
+    @Override
     public int GetNum() {
         return this.numelementos;
     }
 
+    @Override
     public synchronized void Apila(Object elemento) throws Exception {
         if (this.numelementos == this.capacidad) {
             this.canvas.avisa("PILA LLENA");
+            try {
+                Thread.sleep(500); // 100ms es suficiente para que el repintado se inicie.
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
             throw new Exception("La pila esta llena");
         } else {
             this.datos[++this.cima] = elemento;
             ++this.numelementos;
+            this.canvas.avisa("");
             this.actualizarCanvas();
         }
     }
 
+    @Override
     public synchronized Object Desapila() throws Exception {
         if (this.pilavacia()) {
             this.canvas.avisa("PILA VACIA");
+            try {
+                Thread.sleep(500); // Medio segundo para que sea visible
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
             throw new Exception("La pila no contiene ningun elemento");
         } else {
             Object elemento = this.datos[this.cima];
             --this.cima;
             --this.numelementos;
+            this.canvas.avisa("");
             this.actualizarCanvas();
             return elemento;
         }
     }
 
+    @Override
     public Object Primero() throws Exception {
         if (this.pilavacia()) {
             throw new Exception("La pila no contiene ningun elemento");
@@ -76,7 +94,7 @@ public class PilaLenta implements IPila {
         if (this.canvas != null) {
             List<Object> lista = new ArrayList();
 
-            for(int i = 0; i <= this.cima; ++i) {
+            for (int i = 0; i <= this.cima; ++i) {
                 lista.add(this.datos[i]);
             }
 

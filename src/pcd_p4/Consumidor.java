@@ -4,23 +4,27 @@
  */
 package pcd_p4;
 
+import java.awt.Color;
+
 /**
  *
- * @author leonl
+ * @author Lucía Zamudio
  */
 public class Consumidor implements Runnable {
     private PilaLenta pila;
+   // private CanvasPila canvas;
 
     public Consumidor(PilaLenta pila) {
         this.pila = pila;
     }
 
+    @Override
     public void run() {
         for(int i = 0; i < 10; ++i) {
             try {
                 Object num = this.pila.Desapila();
                 System.out.println("Desapila: " + String.valueOf(num));
-                Thread.sleep(1000L);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }

@@ -6,9 +6,8 @@ package pcd_p4;
 
 /**
  *
- * @author leonl
+ * @author Lucía Zamudio Cecilia
  */
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,10 +21,10 @@ public class CanvasPila extends Canvas {
 
     private List<Object> elementos;
     private String mensaje = "";
-    private Image buffer;
+    // private Image buffer;
     private Image fondo;
-    private Color colorPilaLlena = Color.GRAY;
-    private Color colorPilaVacia = Color.GRAY;
+    private Color colorPilaLlena = Color.BLACK;
+    private Color colorPilaVacia = Color.BLACK;
 
     public CanvasPila(int ancho, int alto) {
         this.setSize(ancho, alto);
@@ -46,9 +45,9 @@ public class CanvasPila extends Canvas {
         og.drawString("PilaLenta", 200, 100);
 
         og.setFont(new Font("Arial", Font.BOLD, 15));
-        og.setColor(colorPilaVacia);
+        og.setColor(this.colorPilaVacia);
         og.drawString("PILA VACÍA", 60, 500);
-        og.setColor(colorPilaLlena);
+        og.setColor(this.colorPilaLlena);
         og.drawString("PILA LLENA", 450, 500);
 
         og.setColor(new Color(251, 111, 146, 180));
@@ -76,9 +75,13 @@ public class CanvasPila extends Canvas {
             int textoY = posY - (altoRect / 2) + 5;
             og.drawString(valor, textoX, textoY);
         }
-        
+
         if (!mensaje.isEmpty()) {
-            //og.setColor(Color.RED);
+            if (mensaje.contains("LLENA") || mensaje.contains("VACIA")) {
+                og.setColor(Color.PINK);
+            } else {
+                og.setColor(Color.BLACK);
+            }
             og.setFont(new Font("Arial", Font.BOLD, 16));
             og.drawString(mensaje, 100, 30);
         }
@@ -93,18 +96,16 @@ public class CanvasPila extends Canvas {
 
     public void avisa(String mensaje) {
         this.mensaje = mensaje;
-
         if (mensaje.contains("LLENA")) {
-            colorPilaLlena = Color.RED;
-            colorPilaVacia = Color.GRAY;
+            this.colorPilaLlena = Color.PINK;
+            this.colorPilaVacia = Color.BLACK;
         } else if (mensaje.contains("VACIA")) {
-            colorPilaVacia = Color.RED;
-            colorPilaLlena = Color.GRAY;
+            this.colorPilaVacia = Color.PINK;
+            this.colorPilaLlena = Color.BLACK;
         } else {
-            colorPilaLlena = Color.GRAY;
-            colorPilaVacia = Color.GRAY;
+            this.colorPilaLlena = Color.BLACK;
+            this.colorPilaVacia = Color.BLACK;
         }
-
         repaint();
     }
 

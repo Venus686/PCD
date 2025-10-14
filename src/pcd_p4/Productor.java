@@ -6,12 +6,14 @@ package pcd_p4;
 
 /**
  *
- * @author leonl
+ * @author Lucía Zamudio
  */
+import java.awt.Color;
 import java.util.Random;
 
 public class Productor extends Thread {
     private PilaLenta pila;
+    private CanvasPila canvas;
 
     public Productor(PilaLenta pila) {
         this.pila = pila;
@@ -27,7 +29,7 @@ public class Productor extends Thread {
             try {
                 this.pila.Apila(num_alea);
                 System.out.println("Se apila el: " + num_alea);
-                Thread.sleep(1000L);
+                Thread.sleep(1000);
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }

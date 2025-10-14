@@ -6,7 +6,7 @@ package pcd_p4;
 
 /**
  *
- * @author leonl
+ * @author Lucía Zamudio
  */
 public class PilaFrame extends java.awt.Frame {
 
