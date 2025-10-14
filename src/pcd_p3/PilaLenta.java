@@ -2,13 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pcd_p4;
+package pcd_p3;
 
 /**
  *
  * @author Lucía Zamudio
  */
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 

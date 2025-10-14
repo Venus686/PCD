@@ -2,33 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pcd_p4;
+package pcd_p3;
+
+import java.awt.Color;
 
 /**
  *
  * @author Lucía Zamudio
  */
-import java.awt.Color;
-import java.util.Random;
-
-public class Productor extends Thread {
+public class Consumidor implements Runnable {
     private PilaLenta pila;
-    private CanvasPila canvas;
+   // private CanvasPila canvas;
 
-    public Productor(PilaLenta pila) {
+    public Consumidor(PilaLenta pila) {
         this.pila = pila;
     }
 
     @Override
     public void run() {
-        Random rand = new Random();
-
         for(int i = 0; i < 10; ++i) {
-            int num_alea = rand.nextInt(100);
-
             try {
-                this.pila.Apila(num_alea);
-                System.out.println("Se apila el: " + num_alea);
+                Object num = this.pila.Desapila();
+                System.out.println("Desapila: " + String.valueOf(num));
                 Thread.sleep(1000);
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
